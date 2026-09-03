@@ -1,6 +1,11 @@
-from collections import Counter
 class Solution:
     def frequencySort(self, s: str) -> str:
-        counts = Counter(s)
-        sorted_chars = sorted(counts.items(), key=lambda x: -x[1])
-        return ''.join(ch * freq for ch, freq in sorted_chars)
+        counter=Counter(s)
+        heap=[(-freq, char) for char,freq in counter.items()]
+        heapq.heapify(heap)
+        result=''
+        while heap:
+            freq, char=heapq.heappop(heap)
+            result+=char*-freq
+        return result    
+        
